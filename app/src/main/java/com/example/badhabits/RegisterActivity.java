@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class RegisterActivity extends AppCompatActivity {
     DBHelper myDB;
     TextView textView;
@@ -46,6 +48,9 @@ public class RegisterActivity extends AppCompatActivity {
                 UserModel userModel = new UserModel(username, email,password);
                 if(myDB.insertUser(userModel)){
                     Toast.makeText(RegisterActivity.this, "Succsesfully!", Toast.LENGTH_SHORT).show();
+                    ArrayList<UserModel> arr = myDB.showUsers();
+                    int x;
+                    x=10;
                 }
 
             }

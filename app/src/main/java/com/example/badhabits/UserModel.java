@@ -1,7 +1,7 @@
 package com.example.badhabits;
 
 public class UserModel {
-
+    int id;
     String username;
     String email;
     String password;
@@ -11,6 +11,14 @@ public class UserModel {
         this.email = email;
         this.password = password;
     }
+
+    public UserModel(int id,String username, String email, String password) {
+        this.id=id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
     public String getUsername() {
         return username;
     }
