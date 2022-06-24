@@ -20,9 +20,9 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         myDB = new DBHelper(HomeActivity.this);
         ArrayList<UserModel> arrayList = myDB.getAllUsers();
-        String currentUsername = arrayList.get(LoginActivity.currentUserId-1).getUsername();
+        String currentUsername = arrayList.get(LoginActivity.currentUserId - 1).getUsername();
         textView = (TextView) findViewById(R.id.title_view);
-        textView.setText("Welcome back, " + currentUsername);
-        setContentView(R.layout.activity_home);
+        String aux = "Welcome back, " + currentUsername;
+        textView.setText(aux);
     }
 }
