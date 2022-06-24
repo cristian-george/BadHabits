@@ -1,6 +1,12 @@
 package com.example.badhabits;
 
 public class UserModel {
+
+
+    public int getId() {
+        return id;
+    }
+
     int id;
     String username;
     String email;

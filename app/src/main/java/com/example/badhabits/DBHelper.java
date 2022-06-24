@@ -47,7 +47,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return false;
     }
 
-    public ArrayList<UserModel> showUsers(){
+    public ArrayList<UserModel> getAllUsers(){
         ArrayList<UserModel> arrayList = new ArrayList<>();
         final String select = "Select * FROM users";
         SQLiteDatabase db = this.getWritableDatabase();

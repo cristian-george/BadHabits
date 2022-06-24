@@ -10,8 +10,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class LoginActivity extends AppCompatActivity {
+import java.util.ArrayList;
 
+public class LoginActivity extends AppCompatActivity {
+    DBHelper myDB;
+    public static int currentUserId = -1;
     TextView textView;
     EditText emailView;
     EditText passwordView;
@@ -22,6 +25,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        myDB = new DBHelper(LoginActivity.this);
+
         emailView = (EditText)findViewById(R.id.edtEmail);
         passwordView = (EditText)findViewById(R.id.edtPass);
 
@@ -31,11 +36,16 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String pass = passwordView.getText().toString();
                 String email = emailView.getText().toString();
-                if(pass.equals("razz") && email.equals("razz")){
-                    Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
-                    startActivity(intent);
+                ArrayList<UserModel>arrayList = myDB.getAllUsers();
+                for(UserModel var:arrayList){
+                    if(var.getEmail().equals(email) && var.getPassword().equals(pass)){
+                        currentUserId = var.getId();
+                        Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
+                        startActivity(intent);
+                        break;
+                    }
                 }
-                else{
+                if(currentUserId == -1){
                     Toast.makeText(LoginActivity.this, "Username or password wrong!", Toast.LENGTH_SHORT).show();
                 }
             }
