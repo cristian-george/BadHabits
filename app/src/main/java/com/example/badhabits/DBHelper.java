@@ -46,7 +46,7 @@ public class DBHelper extends SQLiteOpenHelper {
         final String clause = "Delete FROM users WHERE id=" + (LoginActivity.currentUserId - 1);
         db.execSQL(clause);
         LoginActivity.currentUserId = -1;
-        return false;
+        return true;
     }
 
     public ArrayList<UserModel> getAllUsers() {
@@ -62,5 +62,16 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return arrayList;
+    }
+
+    public boolean updateUser(String username, String email, String password) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        if (username != null) {
+            contentValues.put("username", username);
+            db.update("users", contentValues, "id = ?", new String[]{Integer.toString(LoginActivity.currentUserId - 1)});
+        }
+        return true;
     }
 }

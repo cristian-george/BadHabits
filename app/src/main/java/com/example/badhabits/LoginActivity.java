@@ -26,9 +26,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         myDB = new DBHelper(LoginActivity.this);
 
         emailView = (EditText) findViewById(R.id.edtEmail);

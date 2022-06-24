@@ -48,7 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String password = passwordView.getText().toString();
                 UserModel userModel = new UserModel(username, email, password);
                 if (myDB.insertUser(userModel)) {
-                    Toast.makeText(RegisterActivity.this, "Succsesfully!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Successfully!", Toast.LENGTH_SHORT).show();
                 }
 
             }
