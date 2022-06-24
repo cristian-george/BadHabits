@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BadHabits">
         <activity
+            android:name=".Toolbar"
+            android:exported="false" />
+        <activity
+            android:name=".InfoCardActivity"
+            android:exported="false" />
+        <activity
             android:name=".HomeActivity"
             android:exported="false" />
         <activity

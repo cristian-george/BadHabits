@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/greenbackground"
+    android:background="@drawable/background"
     tools:context=".LoginActivity">
+
+    <include layout="@layout/toolbar" />
 
     <EditText
         android:id="@+id/edtPass"
@@ -22,13 +24,14 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:hint="Email" />
+
     <Button
         android:id="@+id/Login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign in"
+        android:layout_below="@id/edtPass"
         android:layout_centerInParent="true"
-        android:layout_below="@id/edtPass"/>
+        android:text="Sign in" />
 
     <TextView
         android:layout_width="114dp"

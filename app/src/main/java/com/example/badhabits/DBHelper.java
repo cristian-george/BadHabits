@@ -31,17 +31,17 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("drop table if exists user_rewards");
     }
 
-    public boolean insertUser (UserModel userModel){
+    public boolean insertUser(UserModel userModel) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("username",userModel.getUsername());
+        contentValues.put("username", userModel.getUsername());
         contentValues.put("email", userModel.getEmail());
         contentValues.put("password", userModel.getPassword());
-        db.insert("users", null,contentValues);
+        db.insert("users", null, contentValues);
         return true;
     }
 
-    public boolean deleteUser(UserModel userModel){
+    public boolean deleteUser(UserModel userModel) {
         SQLiteDatabase db = this.getWritableDatabase();
         final String clause = "Delete FROM users WHERE id=" + (LoginActivity.currentUserId - 1);
         db.execSQL(clause);
@@ -49,14 +49,14 @@ public class DBHelper extends SQLiteOpenHelper {
         return false;
     }
 
-    public ArrayList<UserModel> getAllUsers(){
+    public ArrayList<UserModel> getAllUsers() {
         ArrayList<UserModel> arrayList = new ArrayList<>();
         final String select = "Select * FROM users";
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(select,null);
+        Cursor cursor = db.rawQuery(select, null);
         cursor.moveToFirst();
-        while (!cursor.isAfterLast()){
-            arrayList.add(new UserModel(cursor.getInt(0),cursor.getString(1), cursor.getString(2),cursor.getString(3)));
+        while (!cursor.isAfterLast()) {
+            arrayList.add(new UserModel(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3)));
             cursor.moveToNext();
         }
         cursor.close();

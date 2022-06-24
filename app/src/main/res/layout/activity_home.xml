@@ -7,6 +7,8 @@
     android:background="@drawable/background"
     tools:context=".MainActivity">
 
+    <include layout="@layout/toolbar" />
+
     <TextView
         android:id="@+id/title_view"
         android:layout_width="wrap_content"
@@ -193,6 +195,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/infoCard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_row="2"

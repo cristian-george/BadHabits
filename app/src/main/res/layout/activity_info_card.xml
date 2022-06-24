@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InfoCardActivity"
-    android:background="@drawable/background">
+    android:background="@drawable/background"
+    tools:context=".InfoCardActivity">
+
+    <include layout="@layout/toolbar" />
 
     <TextView
         android:layout_width="300dp"
@@ -35,35 +37,35 @@
         android:id="@+id/btnChangePassword"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Change password"
+        android:layout_below="@id/btnChangeUsername"
         android:layout_centerInParent="true"
+        android:text="Change password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_below="@id/btnChangeUsername"
         tools:layout_editor_absoluteY="452dp" />
 
     <Button
         android:id="@+id/btnChangeEmail"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Change email"
+        android:layout_below="@id/btnChangePassword"
         android:layout_centerInParent="true"
+        android:text="Change email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_below="@id/btnChangePassword"
         tools:layout_editor_absoluteY="500dp" />
 
     <Button
         android:id="@+id/btnDeleteAccount"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Delete account"
+        android:layout_below="@id/btnChangeEmail"
         android:layout_centerInParent="true"
+        android:text="Delete account"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_below="@id/btnChangeEmail"
         tools:layout_editor_absoluteY="548dp" />
 </RelativeLayout>
