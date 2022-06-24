@@ -43,7 +43,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public boolean deleteUser(UserModel userModel){
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
+        final String clause = "Delete FROM users WHERE id=" + (LoginActivity.currentUserId - 1);
+        db.execSQL(clause);
+        LoginActivity.currentUserId = -1;
         return false;
     }
 
