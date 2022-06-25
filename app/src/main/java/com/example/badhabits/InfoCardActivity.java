@@ -19,6 +19,14 @@ public class InfoCardActivity extends AppCompatActivity {
     Button btnUpdateUsername;
     Button btnUpdateEmail;
 
+    private enum ButtonType {
+        NONE,
+        UPDATE_USERNAME,
+        UPDATE_EMAIL,
+        UPDATE_PASSWORD,
+        DELETE_ACCOUNT
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +43,7 @@ public class InfoCardActivity extends AppCompatActivity {
         btnUpdateUsername.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDialog(InfoCardActivity.this, "Change username", "New username: ");
+                showDialog(InfoCardActivity.this, "Change username", "New username: ", ButtonType.UPDATE_USERNAME);
             }
         });
     }
@@ -45,20 +53,20 @@ public class InfoCardActivity extends AppCompatActivity {
         btnUpdateEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDialog(InfoCardActivity.this, "Change email", "New email: ");
+                showDialog(InfoCardActivity.this, "Change email", "New email: ", ButtonType.UPDATE_EMAIL);
             }
         });
     }
 
-    private void changeData(String newData, String success, String fail, int caseCode) {
+    private void changeData(String newData, String success, String fail, ButtonType buttonType) {
         if (newData != null) {
             int isUpdated;
-            switch (caseCode) {
-                case 1: {
+            switch (buttonType) {
+                case UPDATE_USERNAME: {
                     isUpdated = myDB.updateUser(newData, null, null);
                     break;
                 }
-                case 2: {
+                case UPDATE_EMAIL: {
                     isUpdated = myDB.updateUser(null, newData, null);
                     break;
                 }
@@ -76,7 +84,7 @@ public class InfoCardActivity extends AppCompatActivity {
         }
     }
 
-    private void showDialog(Context c, String title, String message) {
+    private void showDialog(Context c, String title, String message, ButtonType buttonType) {
         final EditText taskEditText = new EditText(c);
         AlertDialog dialog = new AlertDialog.Builder(c)
                 .setTitle(title)
@@ -85,12 +93,18 @@ public class InfoCardActivity extends AppCompatActivity {
                 .setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (title.equals("Change username")) {
+                        if (buttonType.equals(ButtonType.UPDATE_USERNAME)) {
                             String newUsername = String.valueOf(taskEditText.getText());
-                            changeData(newUsername, "Successfully changed your username!", "Couldn't change your username!", 1);
-                        } else if (title.equals("Change email")) {
+                            changeData(newUsername,
+                                    "Successfully changed your username!",
+                                    "Couldn't change your username!",
+                                    ButtonType.UPDATE_USERNAME);
+                        } else if (buttonType.equals(ButtonType.UPDATE_EMAIL)) {
                             String newEmail = String.valueOf(taskEditText.getText());
-                            changeData(newEmail, "Successfully changed your email!", "Couldn't change your email!", 2);
+                            changeData(newEmail,
+                                    "Successfully changed your email!",
+                                    "Couldn't change your email!",
+                                    ButtonType.UPDATE_EMAIL);
                         }
                     }
                 })
