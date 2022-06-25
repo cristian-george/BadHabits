@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
@@ -64,14 +65,23 @@ public class DBHelper extends SQLiteOpenHelper {
         return arrayList;
     }
 
-    public boolean updateUser(String username, String email, String password) {
+    public int updateUser(String username, String email, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
         if (username != null) {
             contentValues.put("username", username);
-            db.update("users", contentValues, "id = ?", new String[]{Integer.toString(LoginActivity.currentUserId - 1)});
+            return db.update("users", contentValues, "id = ?", new String[]{Integer.toString(LoginActivity.currentUserId)});
         }
-        return true;
+        if (email != null) {
+            contentValues.put("email", email);
+            return db.update("users", contentValues, "id = ?", new String[]{Integer.toString(LoginActivity.currentUserId)});
+        }
+        if (password != null) {
+            contentValues.put("password", password);
+            return db.update("users", contentValues, "id = ?", new String[]{Integer.toString(LoginActivity.currentUserId)});
+        }
+
+        return 0;
     }
 }

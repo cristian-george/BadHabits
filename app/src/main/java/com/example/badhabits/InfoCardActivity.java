@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class InfoCardActivity extends AppCompatActivity {
     DBHelper myDB;
     Button btnUpdateUsername;
+    Button btnUpdateEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +26,11 @@ public class InfoCardActivity extends AppCompatActivity {
 
         myDB = new DBHelper(InfoCardActivity.this);
 
-        SetButtonUpdateUsername();
+        setButtonUpdateUsername();
+        setButtonUpdateEmail();
     }
 
-    private void SetButtonUpdateUsername() {
+    private void setButtonUpdateUsername() {
         btnUpdateUsername = (Button) findViewById(R.id.btnChangeUsername);
         btnUpdateUsername.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,6 +38,42 @@ public class InfoCardActivity extends AppCompatActivity {
                 showDialog(InfoCardActivity.this, "Change username", "New username: ");
             }
         });
+    }
+
+    private void setButtonUpdateEmail() {
+        btnUpdateEmail = (Button) findViewById(R.id.btnChangeEmail);
+        btnUpdateEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialog(InfoCardActivity.this, "Change email", "New email: ");
+            }
+        });
+    }
+
+    private void changeData(String newData, String success, String fail, int caseCode) {
+        if (newData != null) {
+            int isUpdated;
+            switch (caseCode) {
+                case 1: {
+                    isUpdated = myDB.updateUser(newData, null, null);
+                    break;
+                }
+                case 2: {
+                    isUpdated = myDB.updateUser(null, newData, null);
+                    break;
+                }
+                default:
+                    isUpdated = 0;
+            }
+
+            if (isUpdated != 0) {
+                Toast.makeText(InfoCardActivity.this, success, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(InfoCardActivity.this, fail, Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(InfoCardActivity.this, "Field is null!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void showDialog(Context c, String title, String message) {
@@ -47,13 +85,12 @@ public class InfoCardActivity extends AppCompatActivity {
                 .setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String newUsername = String.valueOf(taskEditText.getText());
-                        if (newUsername != null) {
-                            if (myDB.updateUser(newUsername, null, null)) {
-                                Toast.makeText(InfoCardActivity.this, "Successfully!", Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            Toast.makeText(InfoCardActivity.this, "Username is null!", Toast.LENGTH_SHORT).show();
+                        if (title.equals("Change username")) {
+                            String newUsername = String.valueOf(taskEditText.getText());
+                            changeData(newUsername, "Successfully changed your username!", "Couldn't change your username!", 1);
+                        } else if (title.equals("Change email")) {
+                            String newEmail = String.valueOf(taskEditText.getText());
+                            changeData(newEmail, "Successfully changed your email!", "Couldn't change your email!", 2);
                         }
                     }
                 })
