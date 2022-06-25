@@ -18,6 +18,7 @@ public class InfoCardActivity extends AppCompatActivity {
     DBHelper myDB;
     Button btnUpdateUsername;
     Button btnUpdateEmail;
+    Button btnUpdatePassword;
 
     private enum ButtonType {
         NONE,
@@ -36,6 +37,7 @@ public class InfoCardActivity extends AppCompatActivity {
 
         setButtonUpdateUsername();
         setButtonUpdateEmail();
+        setButtonUpdatePassword();
     }
 
     private void setButtonUpdateUsername() {
@@ -58,6 +60,16 @@ public class InfoCardActivity extends AppCompatActivity {
         });
     }
 
+    private void setButtonUpdatePassword() {
+        btnUpdatePassword = (Button) findViewById(R.id.btnChangePassword);
+        btnUpdatePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialog(InfoCardActivity.this, "Change password", "New password: ", ButtonType.UPDATE_PASSWORD);
+            }
+        });
+    }
+
     private void changeData(String newData, String success, String fail, ButtonType buttonType) {
         if (newData != null) {
             int isUpdated;
@@ -68,6 +80,10 @@ public class InfoCardActivity extends AppCompatActivity {
                 }
                 case UPDATE_EMAIL: {
                     isUpdated = myDB.updateUser(null, newData, null);
+                    break;
+                }
+                case UPDATE_PASSWORD: {
+                    isUpdated = myDB.updateUser(null, null, newData);
                     break;
                 }
                 default:
@@ -98,13 +114,19 @@ public class InfoCardActivity extends AppCompatActivity {
                             changeData(newUsername,
                                     "Successfully changed your username!",
                                     "Couldn't change your username!",
-                                    ButtonType.UPDATE_USERNAME);
+                                    buttonType);
                         } else if (buttonType.equals(ButtonType.UPDATE_EMAIL)) {
                             String newEmail = String.valueOf(taskEditText.getText());
                             changeData(newEmail,
                                     "Successfully changed your email!",
                                     "Couldn't change your email!",
-                                    ButtonType.UPDATE_EMAIL);
+                                    buttonType);
+                        } else if (buttonType.equals(ButtonType.UPDATE_PASSWORD)) {
+                            String newEmail = String.valueOf(taskEditText.getText());
+                            changeData(newEmail,
+                                    "Successfully changed your password!",
+                                    "Couldn't change your password!",
+                                    buttonType);
                         }
                     }
                 })
