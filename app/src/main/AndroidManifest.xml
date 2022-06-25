@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BadHabits">
         <activity
-            android:name=".Toolbar"
+            android:name=".SelectColorActivity"
             android:exported="false" />
         <activity
             android:name=".InfoCardActivity"

@@ -1,6 +1,7 @@
 package com.example.badhabits;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
@@ -16,19 +17,19 @@ import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {
     DBHelper myDB;
-    TextView textView;
     CardView infoCardView;
+
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         myDB = new DBHelper(HomeActivity.this);
-        ArrayList<UserModel> arrayList = myDB.getAllUsers();
-        String currentUsername = arrayList.get(LoginActivity.currentUserId - 1).getUsername();
-        textView = (TextView) findViewById(R.id.title_view);
-        String aux = "Welcome back, " + currentUsername;
-        textView.setText(aux);
+
+        toolbar = findViewById(androidx.appcompat.R.id.action_bar);
+        toolbar.setBackgroundColor(SelectColorActivity.getColor(this));
+        getWindow().setStatusBarColor(SelectColorActivity.getColor(this));
 
         infoCardView = (CardView) findViewById(R.id.infoCard);
         infoCardView.setOnClickListener(new View.OnClickListener() {

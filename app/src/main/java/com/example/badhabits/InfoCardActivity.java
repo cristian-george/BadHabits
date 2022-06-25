@@ -2,6 +2,7 @@ package com.example.badhabits;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -20,6 +21,8 @@ public class InfoCardActivity extends AppCompatActivity {
     Button btnUpdateEmail;
     Button btnUpdatePassword;
 
+    Toolbar toolbar;
+
     private enum ButtonType {
         NONE,
         UPDATE_USERNAME,
@@ -34,6 +37,10 @@ public class InfoCardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_info_card);
 
         myDB = new DBHelper(InfoCardActivity.this);
+
+        toolbar = findViewById(androidx.appcompat.R.id.action_bar);
+        toolbar.setBackgroundColor(SelectColorActivity.getColor(this));
+        getWindow().setStatusBarColor(SelectColorActivity.getColor(this));
 
         setButtonUpdateUsername();
         setButtonUpdateEmail();

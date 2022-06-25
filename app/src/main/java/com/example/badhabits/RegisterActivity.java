@@ -1,6 +1,7 @@
 package com.example.badhabits;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +21,8 @@ public class RegisterActivity extends AppCompatActivity {
     EditText emailView;
     EditText passwordView;
 
+    Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +38,10 @@ public class RegisterActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        toolbar = findViewById(androidx.appcompat.R.id.action_bar);
+        toolbar.setBackgroundColor(SelectColorActivity.getColor(this));
+        getWindow().setStatusBarColor(SelectColorActivity.getColor(this));
 
         usernameView = (EditText) findViewById(R.id.edtUsername);
         emailView = (EditText) findViewById(R.id.edtEmail);

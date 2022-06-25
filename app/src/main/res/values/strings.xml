@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">BadHabits</string>
+    <string name="settings_name">Settings</string>
+    <string name="choose_a_color_for_the_toolbar">Choose a color for the toolbar</string>
+    <string name="red_color">Red color</string>
+    <string name="green_color">Green color</string>
+    <string name="purple_color">Purple color</string>
 </resources>
