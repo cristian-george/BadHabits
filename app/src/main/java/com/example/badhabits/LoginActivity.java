@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
                 if (currentUserId == -1) {
-                    Toast.makeText(LoginActivity.this, "Username or password wrong!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Email or password wrong!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
