@@ -1,13 +1,20 @@
 package com.example.badhabits;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Build;
 import android.os.Bundle;
 
-public class RewardActivity extends AppCompatActivity {
+import java.util.ArrayList;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
+public class RewardActivity extends AppCompatActivity {
+    DBHelper myDB = new DBHelper(RewardActivity.this);
+    //ArrayList<UserModel> users = myDB.getAllUsers();
+   // ArrayList<BadHabitModel>habitModels= myDB.getAllHabits();
     RecyclerView recyclerView;
     RecyclerView.Adapter programAdapter;
     RecyclerView.LayoutManager layoutmanager;

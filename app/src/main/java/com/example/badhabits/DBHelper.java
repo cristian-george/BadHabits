@@ -5,12 +5,17 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Build;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
+import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class DBHelper extends SQLiteOpenHelper {
     public DBHelper(Context context) {
@@ -41,13 +46,13 @@ public class DBHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean insertHabit(int userId, String habit, LocalDate date){
+    public boolean insertHabit(int userId, String habit, LocalDate date) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("id_user",userId);
-        contentValues.put("habit",habit);
+        contentValues.put("id_user", userId);
+        contentValues.put("habit", habit);
         contentValues.put("start_date", String.valueOf(date));
-        db.insert("user_habits",null,contentValues);
+        db.insert("user_habits", null, contentValues);
         return true;
     }
 
@@ -73,6 +78,24 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return arrayList;
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public ArrayList<BadHabitModel> getAllHabits() {
+        ArrayList<BadHabitModel> arrayList = new ArrayList<>();
+        final String select = "Select * FROM user_habits";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(select, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            LocalDate localDate = LocalDate.parse(cursor.getString(2));
+            arrayList.add(new BadHabitModel(cursor.getInt(0),cursor.getString(1),localDate));
+        }
+        cursor.close();
+        db.close();
+        return arrayList;
+
+    }
+
 
     public int updateUser(String username, String email, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
