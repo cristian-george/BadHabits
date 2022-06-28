@@ -119,14 +119,11 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
             String date = dayText + "/";
             date += getYearAndMonth(selectedDate);
             LocalDate selected = LocalDate.parse(date, formatter);
-           // String message = "Selected Date " + dayText + " " + monthYearFromDate(selectedDate);
-           // Toast.makeText(this, message, Toast.LENGTH_LONG).show();
             LocalDate currentDate = LocalDate.now();
             daysBetween = DAYS.between(currentDate, selected);
             Intent intent = new Intent(CalendarActivity.this, ReasonActivity.class);
             intent.putExtra("selectedSpecifiedDate", selected);
             startActivity(intent);
-
             String message = "Selected Date " + dayText + " " + monthYearFromDate(selectedDate);
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         }

@@ -23,7 +23,7 @@ public class HomeActivity extends AppCompatActivity {
     DBHelper myDB;
     CardView infoCardView;
     CardView calendarCardView;
-
+    CardView globalCardView;
     Toolbar toolbar;
 
     @Override
@@ -50,6 +50,15 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, CalendarActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        globalCardView = (CardView) findViewById(R.id.globalCard);
+        globalCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, GlobalActivity.class);
                 startActivity(intent);
             }
         });
