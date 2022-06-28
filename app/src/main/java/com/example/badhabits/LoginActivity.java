@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,7 +25,6 @@ public class LoginActivity extends AppCompatActivity {
     EditText emailView;
     EditText passwordView;
     Button button;
-
     Toolbar toolbar;
 
     @Override
@@ -95,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
+
 }

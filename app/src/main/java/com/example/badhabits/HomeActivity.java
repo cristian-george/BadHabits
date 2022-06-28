@@ -22,6 +22,7 @@ import java.util.ArrayList;
 public class HomeActivity extends AppCompatActivity {
     DBHelper myDB;
     CardView infoCardView;
+    CardView calendarCardView;
 
     Toolbar toolbar;
 
@@ -40,6 +41,15 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this, InfoCardActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        calendarCardView = (CardView) findViewById(R.id.infoCalendar);
+        calendarCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, CalendarActivity.class);
                 startActivity(intent);
             }
         });

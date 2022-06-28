@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -19,15 +20,13 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("create table users" + "(id integer primary key AUTOINCREMENT, username text, email text, password text)");
-        sqLiteDatabase.execSQL("create table bad_habits" + "(id integer primary key AUTOINCREMENT, name text)");
-        sqLiteDatabase.execSQL("create table user_habits" + "(id_user integer references users(id), id_habit integer references bad_habits(id), start_date date) ");
+        sqLiteDatabase.execSQL("create table user_habits" + "(id_user integer references users(id), habit text, start_date date) ");
         sqLiteDatabase.execSQL("create table user_rewards" + "(id_reward integer references users(id), reward text)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("drop table if exists users");
-        sqLiteDatabase.execSQL("drop table if exists bad_habits");
         sqLiteDatabase.execSQL("drop table if exists user_habits");
         sqLiteDatabase.execSQL("drop table if exists user_rewards");
     }
@@ -39,6 +38,16 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put("email", userModel.getEmail());
         contentValues.put("password", userModel.getPassword());
         db.insert("users", null, contentValues);
+        return true;
+    }
+
+    public boolean insertHabit(int userId, String habit, LocalDate date){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("id_user",userId);
+        contentValues.put("habit",habit);
+        contentValues.put("start_date", String.valueOf(date));
+        db.insert("user_habits",null,contentValues);
         return true;
     }
 

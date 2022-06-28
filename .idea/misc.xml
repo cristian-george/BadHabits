@@ -15,10 +15,16 @@
         <entry key="..\:/Facultate/android-project/app/src/main/res/menu/menu.xml" value="0.1" />
         <entry key="..\:/android-project/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1005" />
         <entry key="..\:/android-project/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1005" />
+        <entry key="..\:/android-project/app/src/main/res/layout/activity_calendar.xml" value="0.1828125" />
         <entry key="..\:/android-project/app/src/main/res/layout/activity_home.xml" value="0.25416666666666665" />
+        <entry key="..\:/android-project/app/src/main/res/layout/activity_info_card.xml" value="0.1828125" />
         <entry key="..\:/android-project/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/android-project/app/src/main/res/layout/activity_main.xml" value="0.176" />
+        <entry key="..\:/android-project/app/src/main/res/layout/activity_reason.xml" value="0.2" />
         <entry key="..\:/android-project/app/src/main/res/layout/activity_register.xml" value="0.2" />
+        <entry key="..\:/android-project/app/src/main/res/layout/activity_select_color.xml" value="0.1828125" />
+        <entry key="..\:/android-project/app/src/main/res/layout/calendar_cell.xml" value="0.1828125" />
+        <entry key="..\:/android-project/app/src/main/res/menu/menu.xml" value="0.1828125" />
       </map>
     </option>
   </component>
