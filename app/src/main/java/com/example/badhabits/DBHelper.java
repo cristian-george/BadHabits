@@ -89,11 +89,11 @@ public class DBHelper extends SQLiteOpenHelper {
         while (!cursor.isAfterLast()){
             LocalDate localDate = LocalDate.parse(cursor.getString(2));
             arrayList.add(new BadHabitModel(cursor.getInt(0),cursor.getString(1),localDate));
+            cursor.moveToNext();
         }
         cursor.close();
         db.close();
         return arrayList;
-
     }
 
 

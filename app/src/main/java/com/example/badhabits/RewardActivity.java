@@ -1,5 +1,7 @@
 package com.example.badhabits;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,13 +10,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Build;
 import android.os.Bundle;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class RewardActivity extends AppCompatActivity {
     DBHelper myDB = new DBHelper(RewardActivity.this);
-    //ArrayList<UserModel> users = myDB.getAllUsers();
-   // ArrayList<BadHabitModel>habitModels= myDB.getAllHabits();
     RecyclerView recyclerView;
     RecyclerView.Adapter programAdapter;
     RecyclerView.LayoutManager layoutmanager;
@@ -40,6 +45,9 @@ public class RewardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ArrayList<UserModel> users = myDB.getAllUsers();
+        ArrayList<BadHabitModel>habitModels= myDB.getAllHabits();
+        Collections.sort(habitModels, new Sorting());
         setContentView(R.layout.activity_reward);
         recyclerView = findViewById(R.id.rvProgram);
         recyclerView.setHasFixedSize(true);
@@ -47,5 +55,16 @@ public class RewardActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutmanager);
         programAdapter = new ProgramAdapter(this, programNameList, programDescriptionList, programImages);
         recyclerView.setAdapter(programAdapter);
+    }
+}
+
+class Sorting implements Comparator<BadHabitModel> {
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public int compare(BadHabitModel o1, BadHabitModel o2) {
+        LocalDate localDate = LocalDate.now();
+        int x = (int) DAYS.between(localDate, o2.date);
+        int y = (int) DAYS.between(localDate,o1.date);
+        return x-y;
     }
 }
