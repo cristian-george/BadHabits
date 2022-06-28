@@ -1,12 +1,12 @@
 package com.example.badhabits;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.ArrayAdapter;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.badhabits.databinding.ActivityGlobalBinding;
 
@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -56,7 +55,6 @@ public class GlobalActivity extends AppCompatActivity {
 
         @Override
         public void run() {
-
             mainHandler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -69,7 +67,7 @@ public class GlobalActivity extends AppCompatActivity {
             });
 
             try {
-                URL url = new URL("https://api.npoint.io/5aa483d7a904e3abcd6d");
+                URL url = new URL("https://api.npoint.io/19c91d141d1a404c8a44");
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -91,11 +89,7 @@ public class GlobalActivity extends AppCompatActivity {
                     }
                 }
 
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
+            } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
 
