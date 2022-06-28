@@ -25,6 +25,7 @@ public class HomeActivity extends AppCompatActivity {
     CardView calendarCardView;
     CardView globalCardView;
     Toolbar toolbar;
+    CardView rewardCard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,15 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, GlobalActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        rewardCard = (CardView) findViewById(R.id.rewardsCard);
+        rewardCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, RewardActivity.class);
                 startActivity(intent);
             }
         });
