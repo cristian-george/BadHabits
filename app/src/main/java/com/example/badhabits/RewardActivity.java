@@ -22,8 +22,8 @@ public class RewardActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerView.Adapter programAdapter;
     RecyclerView.LayoutManager layoutManager;
-    String[] programNameList = {"C", "C++", "Java", "Android", "HTML5", "CSS3", "JavaScript", "jQuery", "Bootstrap", "PHP",
-            "MySQL", "CodeIgniter", "React", "NodeJS", "AngularJS", "PostgreSQL", "Python", "C#", "Wordpress", "GitHub"};
+    /*String[] programNameList = {"C", "C++", "Java", "Android", "HTML5", "CSS3", "JavaScript", "jQuery", "Bootstrap", "PHP",
+            "MySQL", "CodeIgniter", "React", "NodeJS", "AngularJS", "PostgreSQL", "Python", "C#", "Wordpress", "GitHub"};*/
     String[] programDescriptionList = {"C Description", "C++ Description", "Java Description",
             "Android Description", "HTML5 Description",
             "CSS3 Description", "JavaScript Description", "jQuery Description",
@@ -53,7 +53,11 @@ public class RewardActivity extends AppCompatActivity {
         toolbar = findViewById(androidx.appcompat.R.id.action_bar);
         toolbar.setBackgroundColor(SelectColorActivity.getColor(this));
         getWindow().setStatusBarColor(SelectColorActivity.getColor(this));
-
+        String[] programNameList = new String[habitModels.size()];
+        for(int index=0;index<programNameList.length;++index)
+        {
+            programNameList[index] = (users.get(habitModels.get(index).getUserId()).getUsername());
+        }
         recyclerView = findViewById(R.id.rvProgram);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
@@ -78,6 +82,6 @@ class Sorting implements Comparator<BadHabitModel> {
         LocalDate localDate = LocalDate.now();
         int x = (int) DAYS.between(localDate, o2.date);
         int y = (int) DAYS.between(localDate, o1.date);
-        return x - y;
+        return y-x;
     }
 }
