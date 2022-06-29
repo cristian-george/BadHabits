@@ -1,125 +1,91 @@
 package com.example.badhabits;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
-    DBHelper myDB;
-    TextView textView;
-    Button registerButton;
-    EditText usernameView;
-    EditText emailView;
-    EditText passwordView;
-    EditText repeatPasswordView;
 
-    Toolbar toolbar;
+    private EditText usernameEditText;
+    private EditText emailEditText;
+    private EditText passwordEditText;
+    private EditText repeatPasswordEditText;
+
+    private Toolbar toolbar;
+
+    private DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        myDB = new DBHelper(RegisterActivity.this);
-        textView = (TextView) findViewById(R.id.textView2);
-        textView.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
+        dbHelper = new DBHelper(RegisterActivity.this);
+        TextView textView = findViewById(R.id.textView2);
+        textView.setOnClickListener(view -> {
+            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+            startActivity(intent);
         });
 
         toolbar = findViewById(androidx.appcompat.R.id.action_bar);
         toolbar.setBackgroundColor(SelectColorActivity.getColor(this));
         getWindow().setStatusBarColor(SelectColorActivity.getColor(this));
 
-        usernameView = (EditText) findViewById(R.id.edtUsername);
-        emailView = (EditText) findViewById(R.id.edtEmail);
-        passwordView = (EditText) findViewById(R.id.edtPass);
-        registerButton = (Button) findViewById(R.id.register_btn);
-        repeatPasswordView = (EditText) findViewById(R.id.edtRepeatpass);
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String username = usernameView.getText().toString();
-                String email = emailView.getText().toString();
-                String password = passwordView.getText().toString();
-                String repeatPassword = repeatPasswordView.getText().toString();
-                UserModel userModel = new UserModel(username, email, password);
-                if(!isUsernameValid(username)){
-                    Toast.makeText(RegisterActivity.this, "Username should contain at least 4 characters!", Toast.LENGTH_SHORT).show();
-                }
-                else if(!isEmailValid(email)){
-                    Toast.makeText(RegisterActivity.this, "Email is not valid!", Toast.LENGTH_SHORT).show();
-                }
-                else if(!isPasswordValid(password,repeatPassword)){
-                    Toast.makeText(RegisterActivity.this, "Passwords aren't same or doesn't have 4 characters!", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    boolean inUse = false;
-                    ArrayList<UserModel> arrayList = myDB.getAllUsers();
-                    for(UserModel var:arrayList){
-                        if(var.getEmail().equals(email)) {
-                            inUse = true;
-                            Toast.makeText(RegisterActivity.this, "Email is already in use!", Toast.LENGTH_SHORT).show();
-                            break;
-                        }
-                    }
-                    if(!inUse) {
-                        if (myDB.insertUser(userModel)) {
-                            Toast.makeText(RegisterActivity.this, "Successfully!", Toast.LENGTH_SHORT).show();
-                            arrayList = myDB.getAllUsers();
-                            for (UserModel var : arrayList) {
-                                if (var.getEmail().equals(email) && var.getPassword().equals(password)) {
-                                    LoginActivity.currentUserId = var.getId();
-                                    Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
-                                    startActivity(intent);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+        usernameEditText = findViewById(R.id.edtUsername);
+        emailEditText = findViewById(R.id.edtEmail);
+        passwordEditText = findViewById(R.id.edtPass);
+        repeatPasswordEditText = findViewById(R.id.edtRepeatpass);
 
-            public boolean isPasswordValid(String password, String repeatPassword){
-                if(!password.equals(repeatPassword) || password.length() <=4)
-                    return false;
-                return true;
-            }
+        Button registerButton = findViewById(R.id.register_btn);
+        registerButton.setOnClickListener(view -> {
+            String username = usernameEditText.getText().toString();
+            String email = emailEditText.getText().toString();
+            String password = passwordEditText.getText().toString();
+            String repeatPassword = repeatPasswordEditText.getText().toString();
 
-            public boolean isUsernameValid(String username){
-                if(username.length() < 3)
-                    return false;
-                return true;
-            }
-
-            public boolean isEmailValid(String email){
-                String regex = "^(.+)@(.+)$";
-                Pattern pattern = Pattern.compile(regex);
-                Matcher matcher = pattern.matcher(email);
-                return matcher.matches();
-            }
-
-
+            ArrayList<UserModel> users = dbHelper.getAllUsers();
+            registerValidator(username, email, password, repeatPassword, users);
         });
+    }
+
+    private void registerValidator(String username, String email, String password, String repeatPassword, ArrayList<UserModel> users) {
+        if (!InputValidators.isUsernameValid(username)) {
+            Toast.makeText(RegisterActivity.this, "Username should contain at least 4 characters!", Toast.LENGTH_SHORT).show();
+        } else if (!InputValidators.isEmailValid(email, users)) {
+            Toast.makeText(RegisterActivity.this, "Email is not valid or is already used!", Toast.LENGTH_SHORT).show();
+        } else if (!InputValidators.isPasswordValid(password, repeatPassword)) {
+            Toast.makeText(RegisterActivity.this, "Passwords aren't same or doesn't have at least 4 characters!", Toast.LENGTH_SHORT).show();
+        } else {
+            registerUser(username, email, password);
+        }
+    }
+
+    private void registerUser(String username, String email, String password) {
+        UserModel userModel = new UserModel(username, email, password);
+        if (dbHelper.insertUser(userModel)) {
+            Toast.makeText(RegisterActivity.this, "Successfully!", Toast.LENGTH_SHORT).show();
+            ArrayList<UserModel> users = dbHelper.getAllUsers();
+            for (UserModel var : users) {
+                if (var.getEmail().equals(email) && var.getPassword().equals(password)) {
+                    LoginActivity.currentUserId = var.getId();
+                    Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    break;
+                }
+            }
+        }
     }
 
     @Override

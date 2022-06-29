@@ -45,16 +45,14 @@ public class RewardActivity extends AppCompatActivity {
         getWindow().setStatusBarColor(SelectColorActivity.getColor(this));
         String[] programNameList = new String[habitModels.size()];
         String[] programDescriptionList = new String[habitModels.size()];
-        for(int index=0;index<programNameList.length;++index)
-        {
+        for (int index = 0; index < programNameList.length; ++index) {
             programNameList[index] = (users.get(habitModels.get(index).getUserId()).getUsername());
         }
         LocalDate localDate = LocalDate.now();
-        for(int index=0;index<programDescriptionList.length;++index)
-        {
+        for (int index = 0; index < programDescriptionList.length; ++index) {
             programDescriptionList[index] = habitModels.get(index).getHabit();
             programDescriptionList[index] += "\n";
-            programDescriptionList[index] += String.valueOf(DAYS.between(habitModels.get(index).getDate(),localDate));
+            programDescriptionList[index] += String.valueOf(DAYS.between(habitModels.get(index).getDate(), localDate));
             programDescriptionList[index] += " days";
         }
         recyclerView = findViewById(R.id.rvProgram);
@@ -81,6 +79,6 @@ class Sorting implements Comparator<BadHabitModel> {
         LocalDate localDate = LocalDate.now();
         int x = (int) DAYS.between(localDate, o2.date);
         int y = (int) DAYS.between(localDate, o1.date);
-        return y-x;
+        return y - x;
     }
 }
