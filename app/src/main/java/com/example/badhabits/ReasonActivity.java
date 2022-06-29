@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class ReasonActivity extends AppCompatActivity {
 
@@ -18,6 +19,7 @@ public class ReasonActivity extends AppCompatActivity {
     Button insertBadHabit;
     LocalDate selectedSpecifiedDate;
     DBHelper myDB;
+    String badHabitString;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -35,7 +37,24 @@ public class ReasonActivity extends AppCompatActivity {
             insertBadHabit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    badHabitString = badHabit.getText().toString();
+                    boolean alreadyPlaced = false;
+                    ArrayList<BadHabitModel> habits = myDB.getAllHabits();
+                    for(BadHabitModel var : habits){
+                        if(var.getUserId() == LoginActivity.currentUserId-1){
+                            if(badHabitString.equals(var.getHabit())){
+                                alreadyPlaced=true;
+                                break;
+                            }
+                        }
+                    }
+                    if(alreadyPlaced){
+                        Toast.makeText(ReasonActivity.this, "You already put this bad habit!", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
                         myDB.insertHabit(LoginActivity.currentUserId - 1, badHabit.getText().toString(), selectedSpecifiedDate);
+                        Toast.makeText(ReasonActivity.this, "You inserted your bad habit succesfully!", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
         }
