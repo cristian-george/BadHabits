@@ -1,15 +1,16 @@
-package com.example.badhabits;
+package com.example.badhabits.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+
+import com.example.badhabits.R;
+import com.example.badhabits.models.BadHabitModel;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class BadHabitModelAdapter extends ArrayAdapter<BadHabitModel> {
         LocalDate date = getItem(position).getDate();
 
         //Create the person object with the information
-        BadHabitModel badHabitModel = new BadHabitModel(userId,habit,date);
+        BadHabitModel badHabitModel = new BadHabitModel(userId, habit, date);
 
         //create the view result for showing the animation
         final View result;
@@ -49,10 +50,10 @@ public class BadHabitModelAdapter extends ArrayAdapter<BadHabitModel> {
         ViewHolder holder;
 
 
-        if(convertView == null){
+        if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(mContext);
             convertView = inflater.inflate(mResource, parent, false);
-            holder= new ViewHolder();
+            holder = new ViewHolder();
             holder.userId = (TextView) convertView.findViewById(R.id.textView1);
             holder.habit = (TextView) convertView.findViewById(R.id.textView2);
             holder.date = (TextView) convertView.findViewById(R.id.textView3);
@@ -60,8 +61,7 @@ public class BadHabitModelAdapter extends ArrayAdapter<BadHabitModel> {
             result = convertView;
 
             convertView.setTag(holder);
-        }
-        else{
+        } else {
             holder = (ViewHolder) convertView.getTag();
             result = convertView;
         }

@@ -1,4 +1,4 @@
-package com.example.badhabits;
+package com.example.badhabits.activities;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -7,6 +7,8 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.example.badhabits.R;
 
 public class SelectColorActivity extends AppCompatActivity {
     Toolbar toolbar;

@@ -1,4 +1,4 @@
-package com.example.badhabits;
+package com.example.badhabits.activities;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -9,6 +9,10 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.example.badhabits.R;
+import com.example.badhabits.database.DBHelper;
+import com.example.badhabits.models.BadHabitModel;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

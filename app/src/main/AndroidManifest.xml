@@ -12,34 +12,34 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BadHabits">
         <activity
-            android:name=".ProfileActivity"
+            android:name=".activities.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".RewardActivity"
+            android:name=".activities.RewardActivity"
             android:exported="false" />
         <activity
-            android:name=".GlobalActivity"
+            android:name=".activities.GlobalActivity"
             android:exported="false" />
         <activity
-            android:name=".ReasonActivity"
+            android:name=".activities.ReasonActivity"
             android:exported="false" />
         <activity
-            android:name=".CalendarActivity"
+            android:name=".activities.CalendarActivity"
             android:exported="false" />
         <activity
-            android:name=".SelectColorActivity"
+            android:name=".activities.SelectColorActivity"
             android:exported="false" />
         <activity
-            android:name=".InfoCardActivity"
+            android:name=".activities.InfoCardActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".activities.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".activities.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".activities.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

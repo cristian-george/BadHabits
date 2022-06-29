@@ -1,10 +1,12 @@
-package com.example.badhabits;
+package com.example.badhabits.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.badhabits.R;
 
 public class MainActivity extends AppCompatActivity {
 

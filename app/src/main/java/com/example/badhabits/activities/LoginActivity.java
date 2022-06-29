@@ -1,11 +1,10 @@
-package com.example.badhabits;
+package com.example.badhabits.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,6 +14,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.badhabits.R;
+import com.example.badhabits.database.DBHelper;
+import com.example.badhabits.models.UserModel;
 
 import java.util.ArrayList;
 

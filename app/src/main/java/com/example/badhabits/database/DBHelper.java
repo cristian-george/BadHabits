@@ -1,4 +1,4 @@
-package com.example.badhabits;
+package com.example.badhabits.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,16 +6,15 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
-import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
-import java.lang.reflect.Array;
-import java.text.SimpleDateFormat;
+import com.example.badhabits.activities.LoginActivity;
+import com.example.badhabits.models.BadHabitModel;
+import com.example.badhabits.models.UserModel;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class DBHelper extends SQLiteOpenHelper {
     public DBHelper(Context context) {
@@ -56,9 +55,9 @@ public class DBHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean deleteHabit(BadHabitModel badHabitModel){
+    public boolean deleteHabit(BadHabitModel badHabitModel) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete("user_habits", "habit = ? and id_user = ?",new String[]{badHabitModel.getHabit(), String.valueOf(badHabitModel.getUserId())}) > 0;
+        return db.delete("user_habits", "habit = ? and id_user = ?", new String[]{badHabitModel.getHabit(), String.valueOf(badHabitModel.getUserId())}) > 0;
     }
 
     public ArrayList<UserModel> getAllUsers() {

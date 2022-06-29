@@ -1,4 +1,4 @@
-package com.example.badhabits;
+package com.example.badhabits.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,6 +6,9 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.badhabits.helper.CalendarViewHolder;
+import com.example.badhabits.R;
 
 import java.util.ArrayList;
 

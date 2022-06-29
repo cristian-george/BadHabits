@@ -1,4 +1,4 @@
-package com.example.badhabits;
+package com.example.badhabits.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +14,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.example.badhabits.helper.InputValidators;
+import com.example.badhabits.R;
+import com.example.badhabits.database.DBHelper;
+import com.example.badhabits.models.UserModel;
 
 import java.util.ArrayList;
 

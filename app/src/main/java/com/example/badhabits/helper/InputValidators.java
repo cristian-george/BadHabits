@@ -1,4 +1,6 @@
-package com.example.badhabits;
+package com.example.badhabits.helper;
+
+import com.example.badhabits.models.UserModel;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;

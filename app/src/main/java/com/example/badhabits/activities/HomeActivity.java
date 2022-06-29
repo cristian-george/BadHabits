@@ -1,4 +1,11 @@
-package com.example.badhabits;
+package com.example.badhabits.activities;
+
+import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -6,20 +13,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.icu.text.IDNA;
-import android.os.Build;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
+import com.example.badhabits.R;
+import com.example.badhabits.database.DBHelper;
 
-import java.util.ArrayList;
+import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity {
     DBHelper myDB;
@@ -30,6 +27,7 @@ public class HomeActivity extends AppCompatActivity {
     CardView rewardCard;
     CardView profileCard;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,50 +38,36 @@ public class HomeActivity extends AppCompatActivity {
         toolbar.setBackgroundColor(SelectColorActivity.getColor(this));
         getWindow().setStatusBarColor(SelectColorActivity.getColor(this));
 
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Welcome back, " +
+                myDB.getAllUsers().get(LoginActivity.currentUserId - 1).getUsername() + "!");
         infoCardView = (CardView) findViewById(R.id.infoCard);
-        infoCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this, InfoCardActivity.class);
-                startActivity(intent);
-            }
+        infoCardView.setOnClickListener(view -> {
+            Intent intent = new Intent(HomeActivity.this, InfoCardActivity.class);
+            startActivity(intent);
         });
 
         calendarCardView = (CardView) findViewById(R.id.infoCalendar);
-        calendarCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, CalendarActivity.class);
-                startActivity(intent);
-            }
+        calendarCardView.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, CalendarActivity.class);
+            startActivity(intent);
         });
 
         globalCardView = (CardView) findViewById(R.id.globalCard);
-        globalCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, GlobalActivity.class);
-                startActivity(intent);
-            }
+        globalCardView.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, GlobalActivity.class);
+            startActivity(intent);
         });
 
         rewardCard = (CardView) findViewById(R.id.rewardsCard);
-        rewardCard.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, RewardActivity.class);
-                startActivity(intent);
-            }
+        rewardCard.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, RewardActivity.class);
+            startActivity(intent);
         });
 
         profileCard = (CardView) findViewById(R.id.homecard);
-        profileCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this,ProfileActivity.class);
-                startActivity(intent);
-            }
+        profileCard.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
+            startActivity(intent);
         });
     }
 
@@ -93,6 +77,9 @@ public class HomeActivity extends AppCompatActivity {
 
         toolbar.setBackgroundColor(SelectColorActivity.getColor(this));
         getWindow().setStatusBarColor(SelectColorActivity.getColor(this));
+
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Welcome back, " +
+                myDB.getAllUsers().get(LoginActivity.currentUserId - 1).getUsername() + "!");
     }
 
     @Override

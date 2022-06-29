@@ -1,4 +1,4 @@
-package com.example.badhabits;
+package com.example.badhabits.models;
 
 public class UserModel {
 

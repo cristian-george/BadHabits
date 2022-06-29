@@ -1,4 +1,4 @@
-package com.example.badhabits;
+package com.example.badhabits.activities;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -10,6 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Build;
 import android.os.Bundle;
+
+import com.example.badhabits.adapters.ProgramAdapter;
+import com.example.badhabits.R;
+import com.example.badhabits.database.DBHelper;
+import com.example.badhabits.models.BadHabitModel;
+import com.example.badhabits.models.UserModel;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.example.badhabits;
+package com.example.badhabits.models;
 
 import java.time.LocalDate;
 
@@ -29,7 +29,7 @@ public class BadHabitModel {
 
     int userId;
     String habit;
-    LocalDate date;
+    public LocalDate date;
 
     public BadHabitModel(int userId, String habit, LocalDate date) {
         this.userId = userId;

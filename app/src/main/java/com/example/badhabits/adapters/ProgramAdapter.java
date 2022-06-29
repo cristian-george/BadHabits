@@ -1,4 +1,4 @@
-package com.example.badhabits;
+package com.example.badhabits.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.badhabits.R;
 
 // Create the adapter by extending RecyclerView.Adapter. This custom ViewHolder will give access to your views
 public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHolder> {

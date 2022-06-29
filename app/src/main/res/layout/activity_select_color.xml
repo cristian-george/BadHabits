@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:orientation="vertical"
-    tools:context=".SelectColorActivity">
+    tools:context=".activities.SelectColorActivity">
 
     <TextView
         android:id="@+id/textView"

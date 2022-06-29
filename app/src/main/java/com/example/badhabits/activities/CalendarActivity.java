@@ -1,4 +1,4 @@
-package com.example.badhabits;
+package com.example.badhabits.activities;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -15,11 +15,13 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.badhabits.adapters.CalendarAdapter;
+import com.example.badhabits.R;
+
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class CalendarActivity extends AppCompatActivity implements CalendarAdapter.OnItemListener {
 
@@ -114,14 +116,14 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
             LocalDate selected = LocalDate.parse(date, formatter);
             LocalDate currentDate = LocalDate.now();
             daysBetween = DAYS.between(currentDate, selected);
-            if(daysBetween <=0) {
+            if (daysBetween <= 0) {
                 Intent intent = new Intent(CalendarActivity.this, ReasonActivity.class);
                 intent.putExtra("selectedSpecifiedDate", selected);
                 startActivity(intent);
                 String message = "Selected Date " + dayText + " " + monthYearFromDate(selectedDate);
                 Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-            }
-            else Toast.makeText(this,"You can't select a date later than current date!",Toast.LENGTH_LONG).show();
+            } else
+                Toast.makeText(this, "You can't select a date later than current date!", Toast.LENGTH_LONG).show();
         }
     }
 
