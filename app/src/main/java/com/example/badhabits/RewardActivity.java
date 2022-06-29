@@ -32,7 +32,7 @@ public class RewardActivity extends AppCompatActivity {
             "AngularJS Description", "PostgreSQL Description", "Python Description",
             "C# Description", "Wordpress Description", "GitHub Description"};
     // Define an integer array to hold the image recourse ids
-    int[] programImages = {R.drawable.c, R.drawable.cplusplus,
+    int[] programImages = {R.drawable.gold_medal, R.drawable.cplusplus,
             R.drawable.java, R.drawable.android, R.drawable.html5,
             R.drawable.css3, R.drawable.javascript, R.drawable.jquery,
             R.drawable.bootstrap, R.drawable.php, R.drawable.mysql,
