@@ -13,8 +13,8 @@ import java.time.LocalDate;
 
 public class ReasonActivity extends AppCompatActivity {
 
-    EditText badhabit;
-    Button insertBadhabit;
+    EditText badHabit;
+    Button insertBadHabit;
     LocalDate selectedSpecifiedDate;
     DBHelper myDB;
 
@@ -26,15 +26,15 @@ public class ReasonActivity extends AppCompatActivity {
 
         myDB = new DBHelper(ReasonActivity.this);
 
-        badhabit = (EditText) findViewById(R.id.badhabit);
-        insertBadhabit = (Button) findViewById(R.id.insertbadhabit);
+        badHabit = (EditText) findViewById(R.id.badhabit);
+        insertBadHabit = (Button) findViewById(R.id.insertbadhabit);
 
         selectedSpecifiedDate = (LocalDate) getIntent().getExtras().get("selectedSpecifiedDate");
 
-        insertBadhabit.setOnClickListener(new View.OnClickListener() {
+        insertBadHabit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myDB.insertHabit(LoginActivity.currentUserId-1,badhabit.getText().toString(),selectedSpecifiedDate);
+                myDB.insertHabit(LoginActivity.currentUserId - 1, badHabit.getText().toString(), selectedSpecifiedDate);
             }
         });
 

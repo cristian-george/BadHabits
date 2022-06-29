@@ -1,6 +1,7 @@
 package com.example.badhabits;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
@@ -10,6 +11,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.icu.text.IDNA;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -66,6 +68,7 @@ public class HomeActivity extends AppCompatActivity {
 
         rewardCard = (CardView) findViewById(R.id.rewardsCard);
         rewardCard.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, RewardActivity.class);

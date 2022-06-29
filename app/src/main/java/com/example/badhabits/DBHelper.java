@@ -86,9 +86,9 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(select, null);
         cursor.moveToFirst();
-        while (!cursor.isAfterLast()){
+        while (!cursor.isAfterLast()) {
             LocalDate localDate = LocalDate.parse(cursor.getString(2));
-            arrayList.add(new BadHabitModel(cursor.getInt(0),cursor.getString(1),localDate));
+            arrayList.add(new BadHabitModel(cursor.getInt(0), cursor.getString(1), localDate));
             cursor.moveToNext();
         }
         cursor.close();

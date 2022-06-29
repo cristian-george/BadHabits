@@ -21,11 +21,12 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHold
 
     // Create a static inner class and provide references to all the Views for each data item.
     // This is particularly useful for caching the Views within the item layout for fast access.
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         // Declare member variables for all the Views in a row
         TextView rowName;
         TextView rowDescription;
         ImageView rowImage;
+
         // Create a constructor that accepts the entire row and search the View hierarchy to find each subview
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -35,8 +36,9 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHold
             rowImage = itemView.findViewById(R.id.imageView);
         }
     }
+
     // Provide a suitable constructor
-    public ProgramAdapter(Context context, String[] programNameList, String[] programDescriptionList, int[] images){
+    public ProgramAdapter(Context context, String[] programNameList, String[] programDescriptionList, int[] images) {
         // Initialize the class scope variables with values received from constructor
         this.context = context;
         this.programNameList = programNameList;

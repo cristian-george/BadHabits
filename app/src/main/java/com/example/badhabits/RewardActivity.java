@@ -4,6 +4,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,15 +15,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class RewardActivity extends AppCompatActivity {
     DBHelper myDB = new DBHelper(RewardActivity.this);
     RecyclerView recyclerView;
     RecyclerView.Adapter programAdapter;
-    RecyclerView.LayoutManager layoutmanager;
+    RecyclerView.LayoutManager layoutManager;
     String[] programNameList = {"C", "C++", "Java", "Android", "HTML5", "CSS3", "JavaScript", "jQuery", "Bootstrap", "PHP",
             "MySQL", "CodeIgniter", "React", "NodeJS", "AngularJS", "PostgreSQL", "Python", "C#", "Wordpress", "GitHub"};
     String[] programDescriptionList = {"C Description", "C++ Description", "Java Description",
@@ -41,20 +40,34 @@ public class RewardActivity extends AppCompatActivity {
             R.drawable.angularjs, R.drawable.postgresql, R.drawable.python,
             R.drawable.csharp, R.drawable.wordpress, R.drawable.github};
 
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ArrayList<UserModel> users = myDB.getAllUsers();
-        ArrayList<BadHabitModel>habitModels= myDB.getAllHabits();
+        ArrayList<BadHabitModel> habitModels = myDB.getAllHabits();
         Collections.sort(habitModels, new Sorting());
         setContentView(R.layout.activity_reward);
+
+        toolbar = findViewById(androidx.appcompat.R.id.action_bar);
+        toolbar.setBackgroundColor(SelectColorActivity.getColor(this));
+        getWindow().setStatusBarColor(SelectColorActivity.getColor(this));
+
         recyclerView = findViewById(R.id.rvProgram);
         recyclerView.setHasFixedSize(true);
-        layoutmanager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutmanager);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
         programAdapter = new ProgramAdapter(this, programNameList, programDescriptionList, programImages);
         recyclerView.setAdapter(programAdapter);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        toolbar.setBackgroundColor(SelectColorActivity.getColor(this));
+        getWindow().setStatusBarColor(SelectColorActivity.getColor(this));
     }
 }
 
@@ -64,7 +77,7 @@ class Sorting implements Comparator<BadHabitModel> {
     public int compare(BadHabitModel o1, BadHabitModel o2) {
         LocalDate localDate = LocalDate.now();
         int x = (int) DAYS.between(localDate, o2.date);
-        int y = (int) DAYS.between(localDate,o1.date);
-        return x-y;
+        int y = (int) DAYS.between(localDate, o1.date);
+        return x - y;
     }
 }

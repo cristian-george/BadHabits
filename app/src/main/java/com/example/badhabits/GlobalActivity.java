@@ -1,12 +1,18 @@
 package com.example.badhabits;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.badhabits.databinding.ActivityGlobalBinding;
 
@@ -24,16 +30,22 @@ import java.util.ArrayList;
 
 public class GlobalActivity extends AppCompatActivity {
     ActivityGlobalBinding binding;
-    ArrayList<String>usersList;
+    ArrayList<String> usersList;
     ArrayAdapter<String> listAdapter;
     Handler mainHandler = new Handler();
     ProgressDialog progressDialog;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityGlobalBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        toolbar = findViewById(androidx.appcompat.R.id.action_bar);
+        toolbar.setBackgroundColor(SelectColorActivity.getColor(this));
+        getWindow().setStatusBarColor(SelectColorActivity.getColor(this));
+
         initializeUserList();
         binding.fetchData.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,12 +58,12 @@ public class GlobalActivity extends AppCompatActivity {
     private void initializeUserList() {
         usersList = new ArrayList<>();
         listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, usersList);
-        binding.userlist.setAdapter(listAdapter);
+        binding.userList.setAdapter(listAdapter);
     }
 
-    class fetchData extends Thread{
+    class fetchData extends Thread {
 
-        String data="";
+        String data = "";
 
         @Override
         public void run() {
@@ -73,16 +85,15 @@ public class GlobalActivity extends AppCompatActivity {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                 String line;
 
-                while ((line = bufferedReader.readLine()) != null){
+                while ((line = bufferedReader.readLine()) != null) {
                     data = data + line;
-
                 }
 
-                if(!data.isEmpty()){
+                if (!data.isEmpty()) {
                     JSONObject jsonObject = new JSONObject(data);
                     JSONArray users = jsonObject.getJSONArray("Users");
                     usersList.clear();
-                    for(int index = 0 ;index<users.length();++index){
+                    for (int index = 0; index < users.length(); ++index) {
                         JSONObject names = users.getJSONObject(index);
                         String name = names.getString("name");
                         usersList.add(name);
@@ -96,11 +107,19 @@ public class GlobalActivity extends AppCompatActivity {
             mainHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    if(progressDialog.isShowing())
+                    if (progressDialog.isShowing())
                         progressDialog.dismiss();
                     listAdapter.notifyDataSetChanged();
                 }
             });
         }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        toolbar.setBackgroundColor(SelectColorActivity.getColor(this));
+        getWindow().setStatusBarColor(SelectColorActivity.getColor(this));
     }
 }
