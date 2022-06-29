@@ -114,11 +114,14 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
             LocalDate selected = LocalDate.parse(date, formatter);
             LocalDate currentDate = LocalDate.now();
             daysBetween = DAYS.between(currentDate, selected);
-            Intent intent = new Intent(CalendarActivity.this, ReasonActivity.class);
-            intent.putExtra("selectedSpecifiedDate", selected);
-            startActivity(intent);
-            String message = "Selected Date " + dayText + " " + monthYearFromDate(selectedDate);
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            if(daysBetween <=0) {
+                Intent intent = new Intent(CalendarActivity.this, ReasonActivity.class);
+                intent.putExtra("selectedSpecifiedDate", selected);
+                startActivity(intent);
+                String message = "Selected Date " + dayText + " " + monthYearFromDate(selectedDate);
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            }
+            else Toast.makeText(this,"You can't select a date later than current date!",Toast.LENGTH_LONG).show();
         }
     }
 

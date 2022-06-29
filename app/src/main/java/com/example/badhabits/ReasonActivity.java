@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.time.LocalDate;
 
@@ -31,12 +32,11 @@ public class ReasonActivity extends AppCompatActivity {
 
         selectedSpecifiedDate = (LocalDate) getIntent().getExtras().get("selectedSpecifiedDate");
 
-        insertBadHabit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myDB.insertHabit(LoginActivity.currentUserId - 1, badHabit.getText().toString(), selectedSpecifiedDate);
-            }
-        });
-
+            insertBadHabit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                        myDB.insertHabit(LoginActivity.currentUserId - 1, badHabit.getText().toString(), selectedSpecifiedDate);
+                }
+            });
+        }
     }
-}
