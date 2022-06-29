@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Accounts"
+        android:text="Reviews"
         android:textColor="#0E0D0D"
         android:textSize="30dp"
         android:textStyle="bold"
