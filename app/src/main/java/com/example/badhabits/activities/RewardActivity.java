@@ -68,7 +68,7 @@ public class RewardActivity extends AppCompatActivity {
             } else if (days >= 90) {
                 programImages[index] = R.drawable.gold_medal;
             } else {
-                programImages[index] = R.drawable.empty_medal2;
+                programImages[index] = R.drawable.empty_medal;
             }
         }
 
