@@ -1,14 +1,12 @@
 package com.example.badhabits;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.cardview.widget.CardView;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 public class SelectColorActivity extends AppCompatActivity {
     Toolbar toolbar;
@@ -21,39 +19,30 @@ public class SelectColorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_color);
 
-        redColor = (Button) findViewById(R.id.btnRed);
-        greenColor = (Button) findViewById(R.id.btnGreen);
-        purpleColor = (Button) findViewById(R.id.btnPurple);
+        redColor = findViewById(R.id.btnRed);
+        greenColor = findViewById(R.id.btnGreen);
+        purpleColor = findViewById(R.id.btnPurple);
 
         toolbar = findViewById(androidx.appcompat.R.id.action_bar);
         toolbar.setBackgroundColor(getColor(this));
         getWindow().setStatusBarColor(getColor(this));
 
-        redColor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toolbar.setBackgroundColor(getResources().getColor(R.color.red));
-                getWindow().setStatusBarColor(getResources().getColor(R.color.red));
-                storeColor(SelectColorActivity.this, getResources().getColor(R.color.red));
-            }
+        redColor.setOnClickListener(view -> {
+            toolbar.setBackgroundColor(getResources().getColor(R.color.red));
+            getWindow().setStatusBarColor(getResources().getColor(R.color.red));
+            storeColor(SelectColorActivity.this, getResources().getColor(R.color.red));
         });
 
-        greenColor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toolbar.setBackgroundColor(getResources().getColor(R.color.green));
-                getWindow().setStatusBarColor(getResources().getColor(R.color.green));
-                storeColor(SelectColorActivity.this, getResources().getColor(R.color.green));
-            }
+        greenColor.setOnClickListener(view -> {
+            toolbar.setBackgroundColor(getResources().getColor(R.color.green));
+            getWindow().setStatusBarColor(getResources().getColor(R.color.green));
+            storeColor(SelectColorActivity.this, getResources().getColor(R.color.green));
         });
 
-        purpleColor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toolbar.setBackgroundColor(getResources().getColor(R.color.purple_500));
-                getWindow().setStatusBarColor(getResources().getColor(R.color.purple_500));
-                storeColor(SelectColorActivity.this, getResources().getColor(R.color.purple_500));
-            }
+        purpleColor.setOnClickListener(view -> {
+            toolbar.setBackgroundColor(getResources().getColor(R.color.purple_500));
+            getWindow().setStatusBarColor(getResources().getColor(R.color.purple_500));
+            storeColor(SelectColorActivity.this, getResources().getColor(R.color.purple_500));
         });
     }
 
@@ -66,8 +55,6 @@ public class SelectColorActivity extends AppCompatActivity {
 
     public static int getColor(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("ToolbarColor", MODE_PRIVATE);
-        int selectedColor = sharedPreferences.getInt(
-                "color", context.getResources().getColor(com.google.android.material.R.color.design_default_color_primary));
-        return selectedColor;
+        return sharedPreferences.getInt("color", context.getResources().getColor(com.google.android.material.R.color.design_default_color_primary));
     }
 }
