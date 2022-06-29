@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         myDB = new DBHelper(LoginActivity.this);
-
+        currentUserId = -1;
         toolbar = findViewById(androidx.appcompat.R.id.action_bar);
         toolbar.setBackgroundColor(SelectColorActivity.getColor(this));
         getWindow().setStatusBarColor(SelectColorActivity.getColor(this));
@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                currentUserId = -1;
                 String pass = passwordView.getText().toString();
                 String email = emailView.getText().toString();
                 ArrayList<UserModel> arrayList = myDB.getAllUsers();
