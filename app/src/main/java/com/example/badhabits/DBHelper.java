@@ -56,12 +56,9 @@ public class DBHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean deleteUser(UserModel userModel) {
+    public boolean deleteHabit(BadHabitModel badHabitModel){
         SQLiteDatabase db = this.getWritableDatabase();
-        final String clause = "Delete FROM users WHERE id=" + (LoginActivity.currentUserId - 1);
-        db.execSQL(clause);
-        LoginActivity.currentUserId = -1;
-        return true;
+        return db.delete("user_habits", "habit = ? and id_user = ?",new String[]{badHabitModel.getHabit(), String.valueOf(badHabitModel.getUserId())}) > 0;
     }
 
     public ArrayList<UserModel> getAllUsers() {
